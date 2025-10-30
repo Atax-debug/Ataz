@@ -687,7 +687,7 @@ async function startBot() {
           // Use owner number from config.js
           const ownerNumbers = [config.default.ownerNumber];
           const botPrefix = config.default.prefix || COMMAND_PREFIX;
-          const botName = config.default.botName || 'HORLA POOKIE Bot';
+          const botName = config.default.botName || '𝔼𝕔𝕝𝕚𝕡𝕤𝕖 𝕄𝔻';
           const ownerName = config.default.ownerName || 'Bot Owner';
 
           // Send connection success message
@@ -706,7 +706,7 @@ Type ${botPrefix}menu to see all commands
 
 *Bot is now ready to serve!*
 
-© ${ownerName} - Powered by HORLA POOKIE Bot`;
+© ${ownerName} - Powered by Horlapookie`;
 
           // Send to owner numbers
           for (const ownerNum of ownerNumbers) {

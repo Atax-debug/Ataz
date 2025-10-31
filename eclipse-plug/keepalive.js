@@ -22,9 +22,11 @@ export default {
     const from = msg.key.remoteJid;
 
     // Enhanced owner check using config.ownerNumber directly
+    // Extract just numbers for comparison (works in both DMs and groups)
     const senderNumber = msg.key.participant?.split('@')[0] || msg.key.remoteJid.split('@')[0];
-    const ownerNumber = config.ownerNumber.replace(/\+/g, '');
-    const isOwnerByNumber = msg.key.fromMe || isOwner || senderNumber === ownerNumber;
+    const ownerNumber = config.ownerNumber.replace(/[^\d]/g, ''); // Remove all non-digits
+    const extractedSenderNumber = senderNumber?.replace(/[^\d]/g, '') || ''; // Remove all non-digits  
+    const isOwnerByNumber = msg.key.fromMe || isOwner || extractedSenderNumber === ownerNumber;
     
     if (!isOwnerByNumber) {
       return await sock.sendMessage(from, {

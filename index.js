@@ -1233,8 +1233,10 @@ Type ${botPrefix}menu to see all commands
             }
 
             // Check if sender is the owner
-            const ownerNumber = config.ownerNumber.replace(/\+/g, '');
-            const isOwner = isFromMe || senderNumber === ownerNumber;
+            // Extract just the numbers for comparison (works with both DMs and groups)
+            const ownerNumber = config.ownerNumber.replace(/[^\d]/g, ''); // Remove all non-digits
+            const extractedSenderNumber = senderNumber?.replace(/[^\d]/g, '') || ''; // Remove all non-digits
+            const isOwner = isFromMe || extractedSenderNumber === ownerNumber;
 
             // Check bot mode and message origin
             if (botMode === 'self' && !isOwner) {

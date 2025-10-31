@@ -26,7 +26,7 @@ const platformName = {
 }[platform] || platform.charAt(0).toUpperCase() + platform.slice(1);
 
 // Get total command count dynamically
-const totalCommands = (global.commands?.size || 338) + (global.selfCommands?.size || 27);
+const totalCommands = (global.commands?.size || 340) + (global.selfCommands?.size || 27);
 
 // Get current time and date
 const now = new Date();

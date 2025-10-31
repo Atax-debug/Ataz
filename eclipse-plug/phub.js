@@ -1,5 +1,5 @@
 import { horla } from '../lib/horla.js';
-import fetch from 'node-fetch';
+import mumaker from 'mumaker';
 
 const phub = horla({
   nomCom: "phub",
@@ -23,70 +23,21 @@ const phub = horla({
 
     const text = Array.isArray(args) ? args.join(' ') : args.toString();
     const textParts = text.split('|');
-    const text1 = encodeURIComponent(textParts[0]?.trim() || 'Porn');
-    const text2 = encodeURIComponent(textParts[1]?.trim() || 'Hub');
+    const text1 = textParts[0]?.trim() || 'Porn';
+    const text2 = textParts[1]?.trim() || 'Hub';
 
-    // Try multiple API endpoints
-    const apiEndpoints = [
-      `https://api.popcat.xyz/pornhub?text1=${text1}&text2=${text2}`,
-      `https://some-random-api.com/canvas/misc/phub?text1=${text1}&text2=${text2}`,
-      `https://api.caliph.biz.id/api/textpro/pornhub?text1=${text1}&text2=${text2}`
-    ];
+    const combinedText = `${text1}|${text2}`;
+    const anu = await mumaker.textpro("https://en.ephoto360.com/create-pornhub-style-logos-online-free-549.html", [text1, text2]);
 
-    let success = false;
-
-    for (const apiUrl of apiEndpoints) {
-      try {
-        const response = await fetch(apiUrl, { 
-          timeout: 15000,
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-          }
-        });
-
-        if (response.ok) {
-          const contentType = response.headers.get('content-type');
-
-          // Check if response is an image
-          if (contentType && contentType.includes('image')) {
-            const imageBuffer = await response.buffer();
-            await sock.sendMessage(from, {
-              image: imageBuffer,
-              caption: "*Logo by ECLIPSE MD*"
-            }, { quoted: msg });
-            success = true;
-            break;
-          } else {
-            // Try to parse as JSON (some APIs return JSON with image URL)
-            const data = await response.json();
-            if (data.url || data.image || data.result) {
-              const imageUrl = data.url || data.image || data.result;
-              const imgResponse = await fetch(imageUrl, { timeout: 10000 });
-              const imageBuffer = await imgResponse.buffer();
-
-              await sock.sendMessage(from, {
-                image: imageBuffer,
-                caption: "*Logo by ECLIPSE MD*"
-              }, { quoted: msg });
-              success = true;
-              break;
-            }
-          }
-        }
-      } catch (apiError) {
-        console.log(`[PHUB] API ${apiUrl} failed:`, apiError.message);
-        continue;
-      }
-    }
-
-    if (!success) {
-      throw new Error('All logo generation services are currently unavailable. This could be due to:\n• API rate limits\n• Service downtime\n• Network connectivity issues\n\nPlease try again in a few minutes.');
-    }
+    await sock.sendMessage(from, {
+      image: { url: anu.image },
+      caption: "*Logo by ECLIPSE MD*"
+    }, { quoted: msg });
 
   } catch (e) {
     console.error('[PHUB] Error:', e);
     await sock.sendMessage(from, {
-      text: `❌ *Error generating logo*\n\n${e.message}\n\n💡 The logo service is currently unavailable. Please try again later.`
+      text: `❌ *Error generating logo*\n\n${e.message}\n\n💡 Please try again with different text. Example: .phub Cool|Text`
     }, { quoted: msg });
   }
 });

@@ -9,7 +9,7 @@ export default {
     const from = msg.key.remoteJid;
 
     try {
-      const commandsDir = path.join(process.cwd(), 'commands');
+      const commandsDir = path.join(process.cwd(), 'eclipse-plug');
       
       if (!args[0]) {
         // List all command files

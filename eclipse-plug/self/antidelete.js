@@ -221,8 +221,12 @@ export default {
 
 export async function storeMessage(sock, message) {
     try {
+        // Check if antidelete is enabled - if not, don't store anything
         const config = loadAntideleteConfig();
-        if (!config.enabled) return;
+        if (!config.enabled) {
+            console.log('[ANTIDELETE] Skipping storage - antidelete is disabled');
+            return;
+        }
 
         if (!message.key?.id) return;
 

@@ -53,7 +53,40 @@ const cleanTempFolderIfLarge = () => {
     }
 };
 
-setInterval(cleanTempFolderIfLarge, 60 * 1000);
+// Clean old messages from storage (older than 7 days)
+const cleanOldMessages = () => {
+    try {
+        const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+        let cleanedCount = 0;
+        
+        for (const [messageId, data] of messageStore.entries()) {
+            if (data.timestamp) {
+                const messageDate = new Date(data.timestamp);
+                if (messageDate < sevenDaysAgo) {
+                    // Delete associated media file if exists
+                    if (data.mediaPath && fs.existsSync(data.mediaPath)) {
+                        try { fs.unlinkSync(data.mediaPath); } catch {}
+                    }
+                    messageStore.delete(messageId);
+                    cleanedCount++;
+                }
+            }
+        }
+        
+        if (cleanedCount > 0) {
+            saveStoredMessages();
+            console.log(`[ANTIDELETE] Cleaned ${cleanedCount} old messages (>7 days)`);
+        }
+    } catch (err) {
+        console.error('[ANTIDELETE] Error cleaning old messages:', err);
+    }
+};
+
+// Run cleanup every hour for temp folder and old messages
+setInterval(() => {
+    cleanTempFolderIfLarge();
+    cleanOldMessages();
+}, 60 * 60 * 1000); // Every hour
 
 function loadAntideleteConfig() {
     try {
@@ -371,6 +404,22 @@ export async function handleMessageRevocation(sock, revocationMessage) {
 
         const messageId = revocationMessage.message?.protocolMessage?.key?.id;
         if (!messageId) return;
+
+        // Check if the deletion was done by the bot owner (self)
+        const isDeletedBySelf = revocationMessage.key?.fromMe === true;
+        
+        // If deleted by self (bot owner), skip - we only want to track messages deleted by others
+        if (isDeletedBySelf) {
+            console.log(`[ANTIDELETE] Skipping - message deleted by self (owner)`);
+            // Clean up stored message and media
+            const original = messageStore.get(messageId);
+            if (original && original.mediaPath && fs.existsSync(original.mediaPath)) {
+                try { fs.unlinkSync(original.mediaPath); } catch {}
+            }
+            messageStore.delete(messageId);
+            saveStoredMessages();
+            return;
+        }
 
         const deletedBy = revocationMessage.participant || revocationMessage.key?.participant || revocationMessage.key?.remoteJid;
         

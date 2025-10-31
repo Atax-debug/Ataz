@@ -2,6 +2,7 @@ import { exec } from "child_process";
 import util from "util";
 import fs from "fs";
 import path from "path";
+import config from '../config.js';
 
 const execAsync = util.promisify(exec);
 
@@ -74,7 +75,7 @@ export default {
       }
 
       await sock.sendMessage(from, {
-        text: '📥 *Pulling latest changes from GitHub...*\n\n🔗 Repository: GitHub.com/horlapookie/Horlapookie-bot\n⏳ This may take a moment...'
+        text: `📥 *Pulling latest changes from GitHub...*\n\n🔗 Repository: GitHub.com/horlapookie/Horlapookie-bot\n🤖 Bot: ${config.botName}\n⏳ This may take a moment...`
       }, { quoted: msg });
 
       // Pull latest changes from GitHub

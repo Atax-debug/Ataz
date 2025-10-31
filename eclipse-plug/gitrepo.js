@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import config from '../config.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,13 +16,13 @@ export default {
 
         if (!args[0]) {
             return await sock.sendMessage(from, {
-                text: `*📦 GitHub Repository Downloader*\n\nUsage: ?gitrepo <github-url>\n\nExample:\n?gitrepo https://github.com/horlapookie/Horlapookie-bot\n\n*Note:* Supports public repositories only.`
+                text: `*📦 GitHub Repository Downloader*\n\nUsage: ?gitrepo <github-url>\n\nExample:\n?gitrepo https://github.com/horlapookie/Horlapookie-bot\n\n*Bot:* ${config.botName}\n*Note:* Supports public repositories only.`
             }, { quoted: msg });
         }
 
         let repoUrl = args[0];
 
-        // Default to Horlapookie repo if user asks for "this" or "horlapookie"
+        // Default to the bot's repo if user asks for "this"
         if (repoUrl.toLowerCase() === 'this' || repoUrl.toLowerCase() === 'horlapookie') {
             repoUrl = 'https://github.com/horlapookie/Horlapookie-bot';
         }
@@ -75,7 +76,7 @@ export default {
                 document: zipBuffer,
                 mimetype: 'application/zip',
                 fileName: `${cleanRepo}-${repoData.default_branch || 'main'}.zip`,
-                caption: `📦 *${repoData.name}*\n\n📝 Description: ${repoData.description || 'No description'}\n👨‍💻 Owner: ${repoData.owner.login}\n⭐ Stars: ${repoData.stargazers_count}\n🍴 Forks: ${repoData.forks_count}\n📅 Updated: ${new Date(repoData.updated_at).toLocaleDateString()}\n🌐 Language: ${repoData.language || 'Not specified'}\n\n🔗 Repository: ${repoData.html_url}\n\n*© Horlapookie Bot - GitHub Repository Downloader*`
+                caption: `📦 *${repoData.name}*\n\n📝 Description: ${repoData.description || 'No description'}\n👨‍💻 Owner: ${repoData.owner.login}\n⭐ Stars: ${repoData.stargazers_count}\n🍴 Forks: ${repoData.forks_count}\n📅 Updated: ${new Date(repoData.updated_at).toLocaleDateString()}\n🌐 Language: ${repoData.language || 'Not specified'}\n\n🔗 Repository: ${repoData.html_url}\n\n*© ${config.botName} - GitHub Repository Downloader*`
             }, { quoted: msg });
 
             console.log(`[GITREPO] Downloaded repository: ${owner}/${cleanRepo}`);

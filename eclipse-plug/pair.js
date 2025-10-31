@@ -52,12 +52,13 @@ router.get('/', async (req, res) => {
                     let b64data = Buffer.from(data).toString('base64');
                     let session = await Pair_Code_By_Horlapookie.sendMessage(Pair_Code_By_Horlapookie.user.id, { text: b64data });
 
+                    const config = await import('../config.js').then(m => m.default);
                     let Star_MD_TEXT = `
 
 ╭─═━⌬━═─⊹⊱✦⊰⊹─═━⌬━═─ 
 ╎   『 𝐒𝐄𝐒𝐒𝐈𝐎𝐍 𝐂𝐎𝐍𝐍𝐄𝐂𝐓𝐄𝐃 』   
-╎  ✦ ʜᴏʀʟᴀᴘᴏᴏᴋɪᴇ sᴇssɪᴏɴ
-╎  ✦  ʙʏ ʜᴏʀʟᴀᴘᴏᴏᴋɪᴇ
+╎  ✦ ${config.botName} sᴇssɪᴏɴ
+╎  ✦  ʙʏ ${config.ownerName}
 ╰╴╴╴╴
 
 ▌   『 🔐 𝐒𝐄𝐋𝐄𝐂𝐓𝐄𝐃 𝐒𝐄𝐒𝐒𝐈𝐎𝐍 』   
@@ -67,7 +68,7 @@ router.get('/', async (req, res) => {
 ╔═
 ╟   『 𝐂𝐎𝐍𝐓𝐀𝐂𝐓 & 𝐒𝐔𝐏𝐏𝐎𝐑𝐓 』  
 ╟  🎥 𝐘𝐨𝐮𝐓𝐮𝐛𝐞:  https://youtube.com/@olamilekanidowu-zf2yb?si=yqS_0CyNcC-fyTG_ 
-╟  👑 𝐎𝐰𝐧𝐞𝐫: 2349122222622 & 2347049044897  
+╟  👑 𝐎𝐰𝐧𝐞𝐫: ${config.ownerNumber}
 ╟  💻 Github: github.com/horlapookie
 ╟  💻 𝐑𝐞𝐩𝐨: github.com/horlapookie/Horlapookie-bot   
 ╟  👥 𝐖𝐚𝐆𝐫𝐨𝐮𝐩: https://chat.whatsapp.com/GceMJ4DG4aW2n12dGrH20A?mode=ac_t
@@ -75,7 +76,7 @@ router.get('/', async (req, res) => {
 ╟  📸 telegram: t.me/horlapookie  
 ╰  
 ✦⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅✦  
-   𝐄𝐍𝐉𝐎𝐘 Horlapookie!  
+   𝐄𝐍𝐉𝐎𝐘 ${config.botName}!  
 ✦⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅⋆⋅✦  
 ______________________________
 ★彡[ᴅᴏɴ'ᴛ ғᴏʀɢᴇᴛ ᴛᴏ sᴛᴀʀ ᴛʜᴇ ʀᴇᴘᴏ!]彡★

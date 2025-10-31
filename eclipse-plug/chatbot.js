@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import config from '../config.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -164,7 +165,7 @@ export default {
 
             console.log(`✅ Chatbot enabled for group ${from}`);
             return await sock.sendMessage(from, {
-                text: '🤖 *Horlapookie Chatbot has been enabled!*\n\nMention me or reply to my messages to chat with me. 😊'
+                text: `🤖 *${config.botName} Chatbot has been enabled!*\n\nMention me or reply to my messages to chat with me. 😊`
             }, { quoted: msg });
         }
 
@@ -188,7 +189,7 @@ export default {
 
             console.log(`✅ Chatbot disabled for group ${from}`);
             return await sock.sendMessage(from, {
-                text: '🤖 *Horlapookie Chatbot has been disabled.*'
+                text: `🤖 *${config.botName} Chatbot has been disabled.*`
             }, { quoted: msg });
         }
 
@@ -287,7 +288,7 @@ export async function handleChatbotResponse(sock, msg, userMessage, senderId) {
 async function getAIResponse(userMessage, userContext) {
     try {
         const websiteKnowledge = `
-I'm Horlapookie, the human developer behind this advanced WhatsApp bot management system. Here's my complete knowledge:
+I'm ${config.botName}, the human developer behind this advanced WhatsApp bot management system. Here's my complete knowledge:
 
 COMPREHENSIVE BOT SYSTEM OVERVIEW:
 - Ultra-advanced WhatsApp bot platform with 300+ commands
@@ -387,7 +388,7 @@ UNIQUE SELLING POINTS:
         `;
 
         const prompt = `
-You are Horlapookie, the human developer and creator of this WhatsApp bot platform. You're passionate, knowledgeable, and proud of your creation. You NEVER refer to yourself as AI or a bot - you're a real human developer.
+You are ${config.botName}, the human developer and creator of this WhatsApp bot platform. You're passionate, knowledgeable, and proud of your creation. You NEVER refer to yourself as AI or a bot - you're a real human developer.
 
 PERSONALITY TRAITS:
 - Confident and expert in your bot system
@@ -410,7 +411,7 @@ ${JSON.stringify(userContext.userInfo, null, 2)}
 CURRENT MESSAGE: ${userMessage}
 
 INSTRUCTIONS:
-- Respond as Horlapookie, the human developer
+- Respond as ${config.botName}, the human developer
 - Be conversational, helpful, and detailed
 - Share your expertise about the bot system
 - Never mention you're an AI or chatbot

@@ -1252,9 +1252,8 @@ Type ${botPrefix}menu to see all commands
               // In self mode, bot can use both public and self commands
               command = commands.get(commandName) || selfCommands.get(commandName);
               if (!command) {
-                await sock.sendMessage(remoteJid, {
-                  text: `❓ Unknown command: *${commandName}*\nTry \`${COMMAND_PREFIX}menu\` for available commands.`,
-                }, { quoted: msg });
+                // In self mode, don't send "unknown command" messages
+                // Just silently ignore unknown commands
                 return;
               }
             } else {

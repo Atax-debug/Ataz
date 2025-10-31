@@ -1,6 +1,7 @@
 import { exec } from "child_process";
 import util from "util";
 import axios from "axios";
+import config from '../config.js';
 
 const execAsync = util.promisify(exec);
 
@@ -130,6 +131,7 @@ ${prefix}update
 • Repository not accessible
 
 🔗 Repository: github.com/horlapookie/Horlapookie-bot
+🤖 Bot: ${config.botName}
 
 Try again in a few minutes.`
       }, { quoted: msg });

@@ -1,3 +1,4 @@
+import config from '../config.js';
 
 export default {
   name: 'repos',
@@ -6,7 +7,7 @@ export default {
     const from = msg.key.remoteJid;
     
     try {
-      const repoInfo = `𝙍𝙚𝙥𝙤𝙨 𝙤𝙛 "𝙔𝙤𝙪𝙧 𝙃𝙞𝙜𝙝𝙣𝙚𝙨𝙨" 𝘽𝙤𝙩:
+      const repoInfo = `𝙍𝙚𝙥𝙤𝙨 𝙤𝙛 "${config.botName}" 𝘽𝙤𝙩:
 
 1. *𝘗𝘶𝘳𝘦 𝘝1 (𝘖𝘳𝘪𝘨𝘪𝘯𝘢𝘭)*  
    🔗 http://github.com/horlapookie/WhisperRoyalty
@@ -14,7 +15,7 @@ export default {
 2. *𝘝1 𝘉𝘦𝘵𝘢 (𝘞𝘩𝘪𝘴𝘱𝘦𝘳𝘙𝘰𝘺𝘢𝘭𝘵𝘺𝘉)*  
    🔗 https://github.com/horlapookie/WhisperRoyaltyB
 
-3. *𝙈𝙖𝙞𝙣 𝙃𝙤𝙧𝙡𝙖𝙥𝙤𝙤𝙠𝙞𝙚-𝘽𝙤𝙩*  
+3. *𝙈𝙖𝙞𝙣 ${config.botName}*  
    🔗 http://Github.com/horlapookie/Horlapookie-bot
 
 ---
@@ -27,7 +28,7 @@ export default {
 👥 𝙅𝙤𝙞𝙣 𝙤𝙪𝙧 𝙒𝙝𝙖𝙩𝙨𝙖𝙥𝙥 𝘾𝙝𝙖𝙣𝙣𝙚𝙡:  
 🔗 https://whatsapp.com/channel/0029Vb6AZrY2f3EMgD8kRQ01
 
-🌐 𝙃𝙤𝙧𝙡𝙖𝙥𝙤𝙤𝙠𝙞𝙚-𝘽𝙤𝙩 𝙒𝙚𝙗 𝙋𝙤𝙧𝙩𝙖𝙡:  
+🌐 ${config.botName} 𝙒𝙚𝙗 𝙋𝙤𝙧𝙩𝙖𝙡:  
 🔗 https://horlapookie-botweb-deploy.onrender.com
 
 📢 𝙏𝙚𝙡𝙚𝙜𝙧𝙖𝙢 𝘾𝙝𝙖𝙣𝙣𝙚𝙡:  
@@ -38,7 +39,7 @@ export default {
 
 ---
 
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʜᴏʀʟᴀ-ᴘᴏᴏᴋɪᴇ-ʙᴏᴛ©*`;
+*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ${config.botName}©*`;
 
       await sock.sendMessage(from, { text: repoInfo }, { quoted: msg });
       console.log(`[INFO] Repository info sent to: ${from}`);

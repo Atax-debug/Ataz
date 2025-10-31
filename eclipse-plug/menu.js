@@ -506,7 +506,7 @@ const menuText = `╔╭━━〔 *𝔼𝕔𝕝𝕚𝕡𝕤𝕖 𝕄𝔻* 〕━
 ┃✪  ${prefix}webscrap - webscrap command
 ╰━━━━━━━━━━━━━━━━━⊷
 
-> ᴘᴏᴡᴇʀᴇᴅ ʙʏ Horlapookie©`;
+> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ${config.botName}©`;
 
 // Send menu with image and proper context info (includes both channel and external ad reply)
     const messageOptions = {

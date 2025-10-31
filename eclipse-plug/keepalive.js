@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from '../config.js';
 
 let keepAliveInterval = null;
 let currentPingUrl = null;
@@ -20,8 +21,12 @@ export default {
     
     const from = msg.key.remoteJid;
 
-    // Owner check
-    if (!msg.key.fromMe && !isOwner) {
+    // Enhanced owner check using config.ownerNumber directly
+    const senderNumber = msg.key.participant?.split('@')[0] || msg.key.remoteJid.split('@')[0];
+    const ownerNumber = config.ownerNumber.replace(/\+/g, '');
+    const isOwnerByNumber = msg.key.fromMe || isOwner || senderNumber === ownerNumber;
+    
+    if (!isOwnerByNumber) {
       return await sock.sendMessage(from, {
         text: '❌ This command is only available to the bot owner.'
       }, { quoted: msg });

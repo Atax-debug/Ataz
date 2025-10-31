@@ -26,7 +26,7 @@ const platformName = {
 }[platform] || platform.charAt(0).toUpperCase() + platform.slice(1);
 
 // Get total command count dynamically
-const totalCommands = (global.commands?.size || 340) + (global.selfCommands?.size || 27);
+const totalCommands = (global.commands?.size || 349) + (global.selfCommands?.size || 27);
 
 // Get current time and date
 const now = new Date();
@@ -330,7 +330,7 @@ const menuText = `╔╭━━〔 *𝔼𝕔𝕝𝕚𝕡𝕤𝕖 𝕄𝔻* 〕━
 ┃✪  ${prefix}snow - snow command
 ┃✪  ${prefix}transformer - transformer command
 ┃✪  ${prefix}thunder - thunder command
-┃✪  ${prefix}pornhub - pornhub command
+┃✪  ${prefix}phub - pornhub style logo
 ┃✪  ${prefix}harrypotter - harrypotter command
 ┃✪  ${prefix}foggyglass - foggyglass command
 ┃✪  ${prefix}whitegold - whitegold command
@@ -341,13 +341,24 @@ const menuText = `╔╭━━〔 *𝔼𝕔𝕝𝕚𝕡𝕤𝕖 𝕄𝔻* 〕━
 ┃✪  ${prefix}aov - AOV command
 ┃✪  ${prefix}castle - castle command
 ┃✪  ${prefix}dragon - dragon command
-┃✪  ${prefix}avatar - avatar command
 ┃✪  ${prefix}overwatch - overwatch command
 ┃✪  ${prefix}pentakill - pentakill command
 ┃✪  ${prefix}purple - purple command
 ┃✪  ${prefix}gold - gold command
 ┃✪  ${prefix}arena - arena command
 ┃✪  ${prefix}incandescent - incandescent command
+┃✪  ${prefix}comic3d - 3D comic style logo
+┃✪  ${prefix}blackpink - BLACKPINK style logo
+┃✪  ${prefix}silver3d - glossy silver 3D logo
+┃✪  ${prefix}colorneon - colorful neon logo
+┃✪  ${prefix}balloon3d - 3D foil balloon logo
+┃✪  ${prefix}paint3d - 3D colorful paint logo
+┃✪  ${prefix}wetglass - wet glass text effect
+╰━━━━━━━━━━━━━━━━━⊷
+
+╭━━━✦❮ 🖋️ TATTOO EFFECTS ❯✦━⊷
+┃✪  ${prefix}tattoo - create tattoo style text
+┃✪  ${prefix}arrowtattoo - arrow tattoo with signature
 ╰━━━━━━━━━━━━━━━━━⊷
 
 ╭━━━✦❮ 🔍 SEARCH & INFO ❯✦━⊷

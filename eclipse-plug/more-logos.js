@@ -1,43 +1,6 @@
 import { horla } from '../lib/horla.js';
 import mumaker from 'mumaker';
 
-// Deadpool logo
-export const deadpool = horla({
-  nomCom: "deadpool",
-  categorie: "Logo",
-  reaction: "🔴"
-}, async (msg, { sock, args }) => {
-  const from = msg.key.remoteJid;
-  const userName = msg.pushName || "User";
-
-  if (!args || args.length === 0) {
-    await sock.sendMessage(from, {
-      text: `*Example, ${userName}: * .deadpool ${userName}`
-    }, { quoted: msg });
-    return;
-  }
-
-  try {
-    await sock.sendMessage(from, {
-      text: "*Creating Deadpool logo...*"
-    }, { quoted: msg });
-
-    const text = Array.isArray(args) ? args.join(' ') : args.toString();
-    const anu = await mumaker.textpro("https://en.ephoto360.com/create-text-effects-in-the-style-of-the-deadpool-logo-818.html", text);
-
-    await sock.sendMessage(from, {
-      image: { url: anu.image },
-      caption: "*Deadpool Logo by ECLIPSE MD*"
-    }, { quoted: msg });
-
-  } catch (e) {
-    console.error('[DEADPOOL] Error:', e);
-    await sock.sendMessage(from, {
-      text: `❌ *Error creating logo*\n\n${e.message}`
-    }, { quoted: msg });
-  }
-});
-
 // 3D Comic Style
 export const comic3d = horla({
   nomCom: "comic3d",
@@ -186,43 +149,6 @@ export const colorneon = horla({
   }
 });
 
-// Born Pink
-export const bornpink = horla({
-  nomCom: "bornpink",
-  categorie: "Logo",
-  reaction: "🎀"
-}, async (msg, { sock, args }) => {
-  const from = msg.key.remoteJid;
-  const userName = msg.pushName || "User";
-
-  if (!args || args.length === 0) {
-    await sock.sendMessage(from, {
-      text: `*Example, ${userName}: * .bornpink ${userName}`
-    }, { quoted: msg });
-    return;
-  }
-
-  try {
-    await sock.sendMessage(from, {
-      text: "*Creating BORN PINK logo...*"
-    }, { quoted: msg });
-
-    const text = Array.isArray(args) ? args.join(' ') : args.toString();
-    const anu = await mumaker.textpro("https://en.ephoto360.com/create-blackpink-s-born-pink-album-logo-online-779.html", text);
-
-    await sock.sendMessage(from, {
-      image: { url: anu.image },
-      caption: "*BORN PINK Logo by ECLIPSE MD*"
-    }, { quoted: msg });
-
-  } catch (e) {
-    console.error('[BORNPINK] Error:', e);
-    await sock.sendMessage(from, {
-      text: `❌ *Error creating logo*\n\n${e.message}`
-    }, { quoted: msg });
-  }
-});
-
 // Foil Balloon 3D
 export const balloon3d = horla({
   nomCom: "balloon3d",
@@ -334,41 +260,4 @@ export const wetglass = horla({
   }
 });
 
-// Matrix
-export const matrix = horla({
-  nomCom: "matrix",
-  categorie: "Logo",
-  reaction: "🟢"
-}, async (msg, { sock, args }) => {
-  const from = msg.key.remoteJid;
-  const userName = msg.pushName || "User";
-
-  if (!args || args.length === 0) {
-    await sock.sendMessage(from, {
-      text: `*Example, ${userName}: * .matrix ${userName}`
-    }, { quoted: msg });
-    return;
-  }
-
-  try {
-    await sock.sendMessage(from, {
-      text: "*Creating Matrix logo...*"
-    }, { quoted: msg });
-
-    const text = Array.isArray(args) ? args.join(' ') : args.toString();
-    const anu = await mumaker.textpro("https://en.ephoto360.com/create-matrix-movie-photo-effects-online-741.html", text);
-
-    await sock.sendMessage(from, {
-      image: { url: anu.image },
-      caption: "*Matrix Logo by ECLIPSE MD*"
-    }, { quoted: msg });
-
-  } catch (e) {
-    console.error('[MATRIX] Error:', e);
-    await sock.sendMessage(from, {
-      text: `❌ *Error creating logo*\n\n${e.message}`
-    }, { quoted: msg });
-  }
-});
-
-export default { deadpool, comic3d, blackpink, silver3d, colorneon, bornpink, balloon3d, paint3d, wetglass, matrix };
+export default { comic3d, blackpink, silver3d, colorneon, balloon3d, paint3d, wetglass };
